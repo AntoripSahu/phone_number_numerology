@@ -222,22 +222,39 @@ st.markdown("""
         .floating-layer button:hover {
             background-color: #dcdcdc;
         }
+            
+            /* Floating Box Container */
+    #floating-box-left {
+        position: fixed;
+        top: 50%;
+        left: 20px;
+        transform: translateY(-50%);
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
 
 </style>
-<!--
-<div id="floating-box">
+      
+<div id="floating-box-left">
     <div class="floating-layer">
-        <button onclick="location.reload(); return false;">🏠 Home</button>
-        <button onclick="location.reload(); return false;">🔄 Refresh</button>
-    </div>
-    <div class="floating-layer">
-        <button onclick="location.reload(); return false;'">📧 Contact</button>
+        <button style="background-color: #dcdcdc">Planetary Influence</button>
+        <button>1 – Sun ☉</button>
+        <button>2 – Moon ☽</button>
+        <button>3 – Jupiter ♃</button>
+        <button>4 – Rahu ☊</button>
+        <button>5 – Mercury ☿</button>
+        <button>6 – Venus ♀</button>
+        <button>7 – Ketu ☋</button>
+        <button>8 – Saturn ♄</button>
+        <button>9 – Mars ♂</button>
     </div>
 </div>
--->
-
 
 """, unsafe_allow_html=True)
+
+# Link: https://astrologyayurveda.com/blog/astrology-and-numerology/
 
 # ---------- HEADER ----------
 
@@ -250,14 +267,18 @@ st.markdown("""
 st.markdown("""
 <div style='text-align: center; font-weight: bold; font-style: italic; font-size: 18px;'>
 <span style='color: goldenrod;'>──────────</span>   
-<span style='color: #222;'>Decode your destiny through digits</span>   
+<span style='color: gray;'>Decode Your Destiny</span>   
 <span style='color: goldenrod;'>──────────</span>
 </div>
 """, unsafe_allow_html=True)
 
 st.markdown("<br>", unsafe_allow_html=True)
 
-st.title("Phone Number Analysis Tool*")
+
+st.markdown("""
+<h1 style='font-size: 48 px;'>Phone Number Numerology Tool*
+</h1>
+""", unsafe_allow_html=True)
 st.markdown(
     "<p style='color:gray; font-style:italic;'>*This tool is for Indian phone numbers only.</p>",
     unsafe_allow_html=True
