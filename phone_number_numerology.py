@@ -300,7 +300,7 @@ if digits_only.isdigit():
     st.markdown(f"""
         <div class='input-wrapper {"valid" if valid else ""}'>
             <div class='prefix'>&#x1F1EE;&#x1F1F3;+91 -</div>
-            <div class='digit-display'>{digits_only}</div>
+            <div class='digit-display' style="color: {"green" if valid else "red"}; font-weight: bold;">{digits_only}</div>
         </div>
         <div id='digitCounter' class='char-count {"valid" if valid else ""}'>{len(digits_only)}/10</div>
         """, unsafe_allow_html=True)
