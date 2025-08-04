@@ -1,19 +1,11 @@
 import streamlit as st
 
-st.set_page_config(page_title="📲 Phone Number Numerology", layout="centered")
 
+st.set_page_config(page_title="📲 Phone Number Numerology", layout="centered")
 
 # ---------- STYLES ----------
 st.markdown("""
     <style>
-
-        .master-chip {
-            background-color: #e6d6f5;
-            color: #4b0082;
-            font-weight: bold;
-            padding: 2px 6px;
-            border-radius: 4px;
-        }
 
         .sum-box {
             padding: 1em;
@@ -156,6 +148,14 @@ st.markdown("""
             font-size: 14px;
             color: #000;
         }
+            
+        .master-chip {
+            background-color: #e6d6f5;
+            color: #4b0082;
+            font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
 
         .sum-title {
             font-weight: 700;
@@ -185,73 +185,67 @@ st.markdown("""
             font-weight: bold;
         }
             
-        /* Floating Box Container */
-        #floating-box {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        /* Each Layer (like burger stack) */
-        .floating-layer {
-            background-color: #f4f4f4;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-            padding: 12px;
-            width: 160px;
-            text-align: center;
-        }
-
-        /* Buttons inside the layer */
-        .floating-layer button {
-            background-color: #ffffff;
-            border: none;
-            border-radius: 8px;
-            padding: 8px;
-            margin: 4px 0;
-            width: 100%;
-            cursor: pointer;
-            font-weight: 600;
-            color: #333;
-            transition: all 0.2s ease;
-        }
-
-        .floating-layer button:hover {
-            background-color: #dcdcdc;
+        /* By default, hide the floating box */
+        .floating-box-left {
+            display: none;
         }
             
-            /* Floating Box Container */
-    #floating-box-left {
-        position: fixed;
-        top: 50%;
-        left: 20px;
-        transform: translateY(-50%);
-        z-index: 9999;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
+        /* Only show floating-box-left on desktop */
+         @media screen and (min-width: 1081px) {
+            .floating-box-left {
+                position: fixed;
+                top: 50%;
+                left: 20px;
+                transform: translateY(-50%);
+                z-index: 9999;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
 
-</style>
-      
-<div id="floating-box-left">
-    <div class="floating-layer">
-        <button style="background-color: #dcdcdc">Planetary Influence</button>
-        <button>1 – Sun ☉</button>
-        <button>2 – Moon ☽</button>
-        <button>3 – Jupiter ♃</button>
-        <button>4 – Rahu ☊</button>
-        <button>5 – Mercury ☿</button>
-        <button>6 – Venus ♀</button>
-        <button>7 – Ketu ☋</button>
-        <button>8 – Saturn ♄</button>
-        <button>9 – Mars ♂</button>
+            .floating-layer {
+                background-color: #f4f4f4;
+                border-radius: 12px;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+                padding: 12px;
+                width: 160px;
+                text-align: center;
+            }
+
+            .floating-layer button {
+                background-color: #ffffff;
+                border: none;
+                border-radius: 8px;
+                padding: 8px;
+                margin: 4px 0;
+                width: 100%;
+                cursor: pointer;
+                font-weight: 600;
+                color: #333;
+                transition: all 0.2s ease;
+            }
+
+            .floating-layer button:hover {
+                background-color: #dcdcdc;
+            }
+        }
+
+    </style>
+           
+    <div class="floating-box-left">
+        <div class="floating-layer">
+            <button style="background-color: #dcdcdc">Planetary Influence</button>
+            <button>1 – Sun ☉</button>
+            <button>2 – Moon ☽</button>
+            <button>3 – Jupiter ♃</button>
+            <button>4 – Rahu ☊</button>
+            <button>5 – Mercury ☿</button>
+            <button>6 – Venus ♀</button>
+            <button>7 – Ketu ☋</button>
+            <button>8 – Saturn ♄</button>
+            <button>9 – Mars ♂</button>
+        </div>
     </div>
-</div>
 
 """, unsafe_allow_html=True)
 
@@ -260,30 +254,30 @@ st.markdown("""
 # ---------- HEADER ----------
 
 st.markdown("""
-<h1 style='text-align: center; font-size: 48 px;'>
-🔷 Vedic Numerology
-</h1>
-""", unsafe_allow_html=True)
+    <h1 style='text-align: center; font-size: 48 px;'>
+    🔷 Vedic Numerology
+    </h1>
+    """, unsafe_allow_html=True)
 
 st.markdown("""
-<div style='text-align: center; font-weight: bold; font-style: italic; font-size: 18px;'>
-<span style='color: goldenrod;'>──────────</span>   
-<span style='color: gray;'>Decode Your Destiny</span>   
-<span style='color: goldenrod;'>──────────</span>
-</div>
-""", unsafe_allow_html=True)
+    <div style='text-align: center; font-weight: bold; font-style: italic; font-size: 18px;'>
+    <span style='color: goldenrod;'>───────</span>   
+    <span style='color: gray;'>Decode Your Destiny</span>   
+    <span style='color: goldenrod;'>───────</span>
+    </div>
+    """, unsafe_allow_html=True)
 
 st.markdown("<br>", unsafe_allow_html=True)
 
-
 st.markdown("""
-<h1 style='font-size: 48 px;'>Phone Number Numerology Tool*
-</h1>
-""", unsafe_allow_html=True)
+    <h1 style='font-size: 48 px;'>Phone Number Numerology Tool*
+    </h1>
+    """, unsafe_allow_html=True)
+
 st.markdown(
-    "<p style='color:gray; font-style:italic;'>*This tool is for Indian phone numbers only.</p>",
-    unsafe_allow_html=True
-)
+        "<p style='color:gray; font-style:italic;'>*This tool is for Indian phone numbers only.</p>",
+        unsafe_allow_html=True
+    )
 
 st.markdown("#### Enter 10-digit **Indian** phone number: ")
 
@@ -365,13 +359,13 @@ if valid:
     label_slots_html = "".join(
         f"<div class='digit-slot-pointer'>{i}</div>" for i in range(1, 11))
     st.markdown(f"""
-    <div class='digit-slots'>
-        {digit_slots_html}
-    </div>
-    <div class='digit-labels'>
-        {label_slots_html}
-    </div>
-    """, unsafe_allow_html=True)
+        <div class='digit-slots'>
+            {digit_slots_html}
+        </div>
+        <div class='digit-labels'>
+            {label_slots_html}
+        </div>
+        """, unsafe_allow_html=True)
 
     # ---------- SLIDER ----------
 
@@ -393,8 +387,69 @@ else:
 
 st.markdown("---")
 st.markdown("<br>", unsafe_allow_html=True)
+
 st.markdown("""
-<small>
-🔐 <strong>Privacy Statement:</strong> We respect your privacy. This application does <em>not collect, store, or transmit</em> any user data, including phone numbers. All processing occurs locally within your browser and is neither retained nor shared.
-</small>
-""", unsafe_allow_html=True)
+    <small>
+    🔐 <strong>Privacy Statement:</strong> We respect your privacy. This application does <em>not collect, store, or transmit</em> any user data, including phone numbers. All processing occurs locally within your browser and is neither retained nor shared.
+    </small>
+    """, unsafe_allow_html=True)
+
+if valid:
+    st.markdown("""
+        <style>
+        /* By default, hide the planet bar */
+        .planet-bar {
+        display: none;
+        }
+
+        /* Only show this bar on mobile screens */
+        @media screen and (max-width: 1080px) {
+            .planet-bar {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                background: #f9f9f9;
+                background-color: #f4f4f4;
+                box-shadow: 0 -1px 5px rgba(0,0,0,0.1);
+                display: flex;
+                justify-content: space-around;
+                padding: 6px 8px;
+                z-index: 9999;
+                gap: 2px;
+                flex-wrap: wrap;
+            }
+
+            .planet-bar button {                
+                flex: 1 1 auto; 
+                font-weight: 600;
+                padding: 6px;
+                border: none;
+                border-radius: 8px;
+                background-color: #ffffff;
+                box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+                cursor: pointer;
+                white-space: nowrap;
+                text-align: center;
+                color: #333;
+                transition: all 0.2s ease;
+            }
+
+            .planet-bar button:hover {
+                background-color: #dcdcdc;
+            }
+        }
+        </style>
+                    
+        <div class="planet-bar">
+            <button>1 – Su</button>
+            <button>2 – Mo</button>
+            <button>3 – Ju</button>
+            <button>4 – Ra</button>
+            <button>5 – Me</button>
+            <button>6 – Ve</button>
+            <button>7 – Ke</button>
+            <button>8 – Sa</button>
+            <button>9 – Ma</button>
+        </div>
+        """, unsafe_allow_html=True)
