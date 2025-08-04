@@ -407,7 +407,7 @@ st.markdown("<br>", unsafe_allow_html=True)
 
 st.markdown("""
     <small>
-    🔐 <strong>Privacy Statement:</strong> We respect your privacy. This application does <em>not collect, store, or transmit</em> any user data, including phone numbers. All processing occurs locally within your browser and is neither retained nor shared.
+    🔐 <strong>Privacy Statement:</strong> We respect your privacy. This application does <em>not collect, store, or transmit</em> any user data, including phone numbers. All processing occurs within your browser locally.
     </small>
     """, unsafe_allow_html=True)
 
