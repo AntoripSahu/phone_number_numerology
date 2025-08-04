@@ -406,7 +406,7 @@ if valid:
         @media screen and (max-width: 1080px) {
             .planet-bar {
                 position: fixed;
-                bottom: 0;
+                bottom: 1.8rem;
                 left: 0;
                 width: 100%;
                 background: #f9f9f9;
@@ -414,7 +414,7 @@ if valid:
                 box-shadow: 0 -1px 5px rgba(0,0,0,0.1);
                 display: flex;
                 justify-content: space-around;
-                padding: 6px 8px;
+                padding: 10px 0px;
                 z-index: 9999;
                 gap: 2px;
                 flex-wrap: wrap;
@@ -422,8 +422,9 @@ if valid:
 
             .planet-bar button {                
                 flex: 1 1 auto; 
+                width: fit-content;
                 font-weight: 600;
-                padding: 6px;
+                padding: 6px 12px;
                 border: none;
                 border-radius: 8px;
                 background-color: #ffffff;
@@ -453,3 +454,30 @@ if valid:
             <button>9 – Ma</button>
         </div>
         """, unsafe_allow_html=True)
+    
+st.markdown("""
+    <style>
+    .footer-bar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: #f4f4f4;
+        color: #333;
+        padding: 6px 10px;
+        font-size: 0.80rem;
+        text-align: center;
+        border-top: 1px solid #dcdcdc; 
+        z-index: 9990; 
+        box-shadow: 0 -1px 5px rgba(0,0,0,0.1);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    </style>
+
+    <div class="footer-bar">            
+        Shared freely with the Universe ✨
+    </div>
+""", unsafe_allow_html=True)
