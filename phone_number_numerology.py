@@ -261,9 +261,9 @@ st.markdown("""
 
 st.markdown("""
     <div style='text-align: center; font-weight: bold; font-style: italic; font-size: 18px;'>
-    <span style='color: goldenrod;'>───────</span>   
+    <span style='color: goldenrod;'>─────</span>   
     <span style='color: gray;'>Decode Your Destiny</span>   
-    <span style='color: goldenrod;'>───────</span>
+    <span style='color: goldenrod;'>─────</span>
     </div>
     """, unsafe_allow_html=True)
 
