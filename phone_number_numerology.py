@@ -1,6 +1,6 @@
 import streamlit as st
 
-st.set_page_config(page_title="📲 Phone Number Numerology", layout="centered")
+st.set_page_config(page_title="🔢 Phone Number Numerology", layout="centered")
 
 # ---------- STYLES ----------
 st.markdown("""
