@@ -424,7 +424,7 @@ if valid:
                 flex: 1 1 auto; 
                 width: fit-content;
                 font-weight: 600;
-                padding: 6px 12px;
+                padding: 6px 6px;
                 border: none;
                 border-radius: 8px;
                 background-color: #ffffff;
