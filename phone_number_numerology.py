@@ -285,8 +285,12 @@ st.markdown("<br>", unsafe_allow_html=True)
 
 # ---------- INPUT FIELD ----------
 
-digits_only = st.text_input("*This tool is for Indian phone numbers only.",
-                                                        "", max_chars=10, label_visibility="collapsed")
+with st.form("input_form", clear_on_submit=False):
+    col1, col2 = st.columns([6, 1])
+    with col1:
+        digits_only = st.text_input("*This tool is for Indian phone numbers only.", "", max_chars=10, label_visibility="collapsed")
+    with col2:
+        submit = st.form_submit_button("Submit")  
 
 valid = digits_only.isdigit() and len(digits_only) == 10
 
@@ -383,7 +387,20 @@ elif digits_only.isdigit() and len(digits_only) != 10 and len(digits_only) > 0:
 elif not digits_only.isdigit() and len(digits_only) > 0:
     st.warning("⚠️ Only numeric input is allowed. Enter exactly 10-digit phone number.")
 else:
-    st.info("Enter your Indian phone number (without +91) and hit `'Enter'`. ")
+    st.markdown("""
+        <div style='
+            background-color: #eef6ff;
+            padding: 1rem;
+            border-radius: 10px;
+            font-size: 1rem;
+            color: #1560BD;
+        '>
+            Enter your Indian phone number (without +91), then click 
+            <span style="color: green; font-weight: bold;">'Submit'</span> 
+            or hit 
+            <span style="color: green; font-weight: bold;">'Enter'</span>.
+        </div>
+        """, unsafe_allow_html=True)
 
 st.markdown("---")
 st.markdown("<br>", unsafe_allow_html=True)
