@@ -334,8 +334,8 @@ def display_result(title, digit_str):
     <div class="sum-box">
         <div class="sum-title">{title}</div>
         <div class="sum-digits">Digits: {digit_str}</div>
-        <div>Initial Sum: {history[0]}</div>
-        <div>Reduction Path: {reduced_path}</div>
+        <div class="sum-digits">Initial Sum: {history[0]}</div>
+        <div class="sum-digits">Reduction Path: {reduced_path}</div>
         {f'<div class="master-inline">🔮 Master Number ' + str(master_found) + ' detected — karmic potential</div>' if master_found else '<div></div>'}
         <div class="final-single">Final Root: <strong>{final_root}</strong></div>
     </div>
