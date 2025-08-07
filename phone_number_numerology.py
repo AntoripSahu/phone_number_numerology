@@ -1,4 +1,5 @@
 import streamlit as st
+import time
 
 
 st.set_page_config(page_title="📲 Phone Number Numerology", layout="centered")
@@ -59,12 +60,16 @@ st.markdown("""
             margin-bottom: 8px;
         }
 
-        .input-wrapper.get-number {
-            border-color: grey !important;
-        }
-
         .input-wrapper.valid {
             border-color: green !important;
+        }
+            
+        .input-wrapper.invalid {
+            border-color: red !important;
+        }
+        
+        .input-wrapper.all-zero {
+            border-color: gray !important;
         }
 
         .prefix {
@@ -92,6 +97,16 @@ st.markdown("""
 
         .char-count.valid {
             color: green;
+            font-weight: bold;
+        }
+            
+        .char-count.invalid {
+            color: red;
+            font-weight: bold;
+        }
+            
+        .char-count.all-zero {
+            color: gray;
             font-weight: bold;
         }
 
@@ -229,6 +244,15 @@ st.markdown("""
                 background-color: #dcdcdc;
             }
         }
+            
+        @keyframes shimmer {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.92; }
+        }
+            
+        .blackhole {
+            animation: shimmer 4s ease-in-out infinite;
+        }
 
     </style>
            
@@ -274,10 +298,7 @@ st.markdown("""
     </h1>
     """, unsafe_allow_html=True)
 
-st.markdown(
-        "<p style='color:gray; font-style:italic;'>*This tool is for Indian phone numbers only.</p>",
-        unsafe_allow_html=True
-    )
+st.markdown("<p style='color:gray; font-style:italic;'>*This tool is for Indian phone numbers only.</p>", unsafe_allow_html=True)
 
 st.markdown("#### Enter 10-digit **Indian** phone number: ")
 
@@ -293,17 +314,22 @@ with st.form("input_form", clear_on_submit=False):
         submit = st.form_submit_button("Submit")  
 
 valid = digits_only.isdigit() and len(digits_only) == 10
+all_zero = valid and all(z == "0" for z in digits_only)
+
+input_validation_color = "gray" if all_zero else "green" if valid else "red"
+color_selector = "all-zero" if all_zero else "valid" if valid else "invalid"
 
 if digits_only.isdigit():
     st.markdown("---")
     st.markdown("#### You have entered: ")
     st.markdown(f"""
-        <div class='input-wrapper {"valid" if valid else ""}'>
-            <div class='prefix'>&#x1F1EE;&#x1F1F3;+91 -</div>
-            <div class='digit-display' style="color: {"green" if valid else "red"}; font-weight: bold;">{digits_only}</div>
+        <div class='input-wrapper {color_selector}'>
+            <div class='prefix';">{"&#x1F1EE;&#x1F1F3;+91 -" if not all_zero else ""}</div>
+            <div class='digit-display'; style="color: {input_validation_color}; font-weight: bold;">{digits_only}</div>
         </div>
-        <div id='digitCounter' class='char-count {"valid" if valid else ""}'>{len(digits_only)}/10</div>
+        <div id='digitCounter' class='char-count {color_selector}'>{len(digits_only)}/10</div>
         """, unsafe_allow_html=True)
+
 
 # ---------- NUMEROLOGY FUNCTIONS ----------
 
@@ -343,7 +369,7 @@ def display_result(title, digit_str):
 
 # ---------- NUMEROLOGY OUTPUT ----------
 
-if valid:
+if valid and not all(z == "0" for z in digits_only):
     st.markdown("---")
     st.markdown("#### Numerology Breakdown: ")
 
@@ -386,6 +412,32 @@ elif digits_only.isdigit() and len(digits_only) != 10 and len(digits_only) > 0:
     st.warning("⚠️ Enter exactly 10-digit phone number.")
 elif not digits_only.isdigit() and len(digits_only) > 0:
     st.warning("⚠️ Only numeric input is allowed. Enter exactly 10-digit phone number.")
+elif all(z == "0" for z in digits_only) and len(digits_only) == 10:
+    left, center, right = st.columns([1, 2, 1])  
+    with center:
+        with st.spinner('Scanning cosmic field for vibrations...'):
+            time.sleep(2)
+    st.markdown("""
+        <div class="sum-box. master-inline">
+            <div style='
+                text-shadow: 0 0 2px #444, 0 0 10px #aaa;
+                text-align: center; 
+                font-size: 1.5em; 
+                font-family: "Palatino Linotype", "Georgia", serif; 
+                padding: 1.5em 1em; 
+                color: #222;
+            '>
+                <div style='margin-top: 1em; font-size: 1em;'>
+                    You typed all zeroes, and the Universe noticed.
+                </div>
+                <div class='blackhole' style='font-size: 3em; line-height: 1;'>🕳️</div>
+                <div style='margin-top: 1em; font-size: 1em;'>
+                    Welcome to the eternal void, only cosmic silence persists... <br>
+                    No echoes, no vibrations, no fate. Just... null!
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
 else:
     st.markdown("""
         <div style='
