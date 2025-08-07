@@ -508,6 +508,7 @@ if valid:
 
             .planet-bar button:hover {
                 background-color: #dcdcdc;
+                cursor: default;
             }
         }
         </style>
