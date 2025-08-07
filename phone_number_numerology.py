@@ -242,6 +242,7 @@ st.markdown("""
 
             .floating-layer button:hover {
                 background-color: #dcdcdc;
+                cursor: default;
             }
         }
             
