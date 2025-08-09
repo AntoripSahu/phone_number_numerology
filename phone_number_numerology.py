@@ -508,6 +508,9 @@ if valid:
                 z-index: 9999;
                 gap: 2px;
                 flex-wrap: wrap;
+
+                animation: floaty 6s ease-in-out infinite;
+                will-change: transform; 
             }
 
             .planet-bar button {                
@@ -529,6 +532,15 @@ if valid:
             .planet-bar button:hover {
                 background-color: #dcdcdc;
                 cursor: default;
+            }
+                
+            @keyframes floaty {
+                0%, 100% {
+                    transform: translateY(0);
+                }
+                50% {
+                    transform: translateY(-5px);
+                }
             }
         }
         </style>
