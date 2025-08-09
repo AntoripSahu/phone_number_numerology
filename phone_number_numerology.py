@@ -216,7 +216,27 @@ st.markdown("""
                 display: flex;
                 flex-direction: column;
                 gap: 10px;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+                will-change: transform;
+            
+                /* This centers vertically */
+                transform: translateY(-50%);
+            
+                /* The magic: animation */
+                animation: floaty 3s ease-in-out infinite;
             }
+
+
+
+            @keyframes floaty {
+                0%, 100% {
+                    transform: translateY(calc(-50% + 0px));
+                }
+                50% {
+                    transform: translateY(calc(-50% + -5px));
+                }
+            }
+
 
             .floating-layer {
                 background-color: #f4f4f4;
