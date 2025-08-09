@@ -320,7 +320,7 @@ all_zero = valid and all(z == "0" for z in digits_only)
 input_validation_color = "gray" if all_zero else "green" if valid else "red"
 color_selector = "all-zero" if all_zero else "valid" if valid else "invalid"
 
-if digits_only.isdigit():
+if digits_only.isdigit() and not all_zero:
     st.markdown("---")
     st.markdown("#### You have entered: ")
     st.markdown(f"""
