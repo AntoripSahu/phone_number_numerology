@@ -279,7 +279,23 @@ st.markdown("""
            
     <div class="floating-box-left">
         <div class="floating-layer">
-            <button style="background-color: #dcdcdc">Planetary Influence</button>
+            <button style="
+                background-color: #dcdcdc;
+                display: flex;
+                align-items: center; /* center emoji vertically */
+                padding: 12px;
+                height: 60px
+                ">
+                <!-- Left column: planet emoji -->
+                <div style="display: flex; align-items: center; justify-content: center; flex: 0 0 auto; width: 30px;">
+                    <span style="font-size: 1.5em;">🪐</span>
+                </div>
+                <!-- Right column: stacked text -->
+                <div style="display: flex; flex-direction: column; line-height: 1.5; margin-left: 6px;">
+                    <span>Planetary</span>
+                    <span>Influence</span>
+                </div>
+            </button>
             <button>1 – Sun ☉</button>
             <button>2 – Moon ☽</button>
             <button>3 – Jupiter ♃</button>
