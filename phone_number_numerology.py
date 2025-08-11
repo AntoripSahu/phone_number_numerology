@@ -2,6 +2,10 @@ import streamlit as st
 import time
 
 
+# ---------- CONSTANTS & CONFIG ----------
+
+MASTER_NUMBERS = {11, 22, 33}
+
 st.set_page_config(page_title="📲 Phone Number Numerology", layout="centered")
 
 # ---------- STYLES ----------
@@ -337,7 +341,7 @@ st.markdown("""
 
 st.markdown("<p style='color:gray; font-style:italic;'>*This tool is for Indian phone numbers only.</p>", unsafe_allow_html=True)
 
-st.markdown("#### Enter 10-digit **Indian** phone number: ")
+st.markdown("#### Enter 10-Digit **Indian** Phone Number: ")
 
 st.markdown("<br>", unsafe_allow_html=True)
 
@@ -357,20 +361,16 @@ input_validation_color = "gray" if all_zero else "green" if valid else "red"
 color_selector = "all-zero" if all_zero else "valid" if valid else "invalid"
 
 if digits_only.isdigit() and not all_zero:
-    st.markdown("---")
-    st.markdown("#### You have entered: ")
-    st.markdown(f"""
-        <div class='input-wrapper {color_selector}'>
-            <div class='prefix';">{"&#x1F1EE;&#x1F1F3;+91 -" if not all_zero else ""}</div>
-            <div class='digit-display'; style="color: {input_validation_color}; font-weight: bold;">{digits_only}</div>
-        </div>
-        <div id='digitCounter' class='char-count {color_selector}'>{len(digits_only)}/10</div>
-        """, unsafe_allow_html=True)
-
+    with st.expander("You Have Entered: ", expanded=True):
+        st.markdown(f"""
+            <div class='input-wrapper {color_selector}'>
+                <div class='prefix';">{"&#x1F1EE;&#x1F1F3;+91 -" if not all_zero else ""}</div>
+                <div class='digit-display'; style="color: {input_validation_color}; font-weight: bold;">{digits_only}</div>
+            </div>
+            <div id='digitCounter' class='char-count {color_selector}'>{len(digits_only)}/10</div>
+            """, unsafe_allow_html=True)
 
 # ---------- NUMEROLOGY FUNCTIONS ----------
-
-MASTER_NUMBERS = {11, 22}
 
 def sum_and_reduce(digit_str):
     history = []
@@ -407,43 +407,41 @@ def display_result(title, digit_str):
 # ---------- NUMEROLOGY OUTPUT ----------
 
 if valid and not all(z == "0" for z in digits_only):
-    st.markdown("---")
-    st.markdown("#### Numerology Breakdown: ")
+    # st.markdown("---")
+    with st.expander("Standard Analysis: Numerology Breakdown", expanded=True):
+        display_result(f"1. Sum of All 10 Digits", digits_only)
+        display_result(f"2. Sum of Last 4 Digits", digits_only[-4:])
+        display_result(f"3. Sum of First 4 Digits", digits_only[:4])
+        display_result(f"4. Sum of First 6 Digits", digits_only[:6])
 
-    display_result(f"1. Sum of All 10 Digits", digits_only)
-    display_result(f"2. Sum of Last 4 Digits", digits_only[-4:])
-    display_result(f"3. Sum of First 4 Digits", digits_only[:4])
-    display_result(f"4. Sum of First 6 Digits", digits_only[:6])
+    with st.expander("#### Advanced Analysis: Slider for Custom Digits Range", expanded=False):
 
-    st.markdown("---")
-    st.markdown("#### Slider for Custom Digits Range: ")
+        # ---------- DIGIT SLOTS ----------
 
-    # ---------- DIGIT SLOTS ----------
+        padded_digits = list(digits_only.ljust(10, "•"))  # Dots for missing
+        digit_slots_html = "".join(
+            f"<div class='digit-slot'>{d}</div>" for d in padded_digits)
+        label_slots_html = "".join(
+            f"<div class='digit-slot-pointer'>{i}</div>" for i in range(1, 11))
+        st.markdown(f"""
+            <div class='digit-slots'>
+                {digit_slots_html}
+            </div>
+            <div class='digit-labels'>
+                {label_slots_html}
+            </div>
+            """, unsafe_allow_html=True)
 
-    padded_digits = list(digits_only.ljust(10, "•"))  # Dots for missing
-    digit_slots_html = "".join(
-        f"<div class='digit-slot'>{d}</div>" for d in padded_digits)
-    label_slots_html = "".join(
-        f"<div class='digit-slot-pointer'>{i}</div>" for i in range(1, 11))
-    st.markdown(f"""
-        <div class='digit-slots'>
-            {digit_slots_html}
-        </div>
-        <div class='digit-labels'>
-            {label_slots_html}
-        </div>
-        """, unsafe_allow_html=True)
+        # ---------- SLIDER ----------
 
-    # ---------- SLIDER ----------
+        if valid:
+            start, end = st.slider("Digit Positions (1–10)", 1, 10, (7, 10))
+            custom_slice = digits_only[start - 1:end]
+        else:
+            custom_slice = ""
 
-    if valid:
-        start, end = st.slider("Digit Positions (1–10)", 1, 10, (7, 10))
-        custom_slice = digits_only[start - 1:end]
-    else:
-        custom_slice = ""
-
-    if custom_slice:
-        display_result(f"5. Sum of Digits {start} through {end}", custom_slice)
+        if custom_slice:
+            display_result(f"5. Sum of Digits {start} through {end}", custom_slice)
 
 elif digits_only.isdigit() and len(digits_only) != 10 and len(digits_only) > 0:
     st.warning("⚠️ Enter exactly 10-digit phone number.")
