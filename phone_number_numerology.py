@@ -278,6 +278,24 @@ st.markdown("""
         .blackhole {
             animation: shimmer 4s ease-in-out infinite;
         }
+            
+        /* Light theme highlight */
+        @media (prefers-color-scheme: light) {
+            .highlight-slot {
+                background-color: #cce5ff; /* soft sky blue */
+                color: #000;               
+                font-weight: bold;
+            }
+        }
+
+        /* Dark theme highlight */
+        @media (prefers-color-scheme: dark) {
+            .highlight-slot {
+                background-color: #3399ff; /* stronger blue for contrast */
+                color: #fff;               
+                font-weight: bold;
+            }
+        }
 
     </style>
            
@@ -323,7 +341,6 @@ st.markdown("""
     🔷 Vedic Numerology
     </h1>
     """, unsafe_allow_html=True)
-
 st.markdown("""
     <div style='text-align: center; font-weight: bold; font-style: italic; font-size: 18px;'>
     <span style='color: goldenrod;'>─────</span>   
@@ -331,18 +348,13 @@ st.markdown("""
     <span style='color: goldenrod;'>─────</span>
     </div>
     """, unsafe_allow_html=True)
-
 st.markdown("<br>", unsafe_allow_html=True)
-
 st.markdown("""
     <h1 style='font-size: 48 px;'>Phone Number Numerology Tool*
     </h1>
     """, unsafe_allow_html=True)
-
 st.markdown("<p style='color:gray; font-style:italic;'>*This tool is for Indian phone numbers only.</p>", unsafe_allow_html=True)
-
 st.markdown("#### Enter 10-Digit **Indian** Phone Number: ")
-
 st.markdown("<br>", unsafe_allow_html=True)
 
 # ---------- INPUT FIELD ----------
@@ -376,11 +388,9 @@ def sum_and_reduce(digit_str):
     history = []
     current = sum(int(d) for d in digit_str)
     history.append(current)
-
     while current > 9:
         current = sum(int(d) for d in str(current))
         history.append(current)
-
     return history
 
 def display_result(title, digit_str):
@@ -407,7 +417,7 @@ def display_result(title, digit_str):
 # ---------- NUMEROLOGY OUTPUT ----------
 
 if valid and not all(z == "0" for z in digits_only):
-    # st.markdown("---")
+
     with st.expander("Standard Analysis: Numerology Breakdown", expanded=True):
         display_result(f"1. Sum of All 10 Digits", digits_only)
         display_result(f"2. Sum of Last 4 Digits", digits_only[-4:])
@@ -415,32 +425,31 @@ if valid and not all(z == "0" for z in digits_only):
         display_result(f"4. Sum of First 6 Digits", digits_only[:6])
 
     with st.expander("#### Advanced Analysis: Slider for Custom Digits Range", expanded=False):
-
-        # ---------- DIGIT SLOTS ----------
-
-        padded_digits = list(digits_only.ljust(10, "•"))  # Dots for missing
-        digit_slots_html = "".join(
-            f"<div class='digit-slot'>{d}</div>" for d in padded_digits)
-        label_slots_html = "".join(
-            f"<div class='digit-slot-pointer'>{i}</div>" for i in range(1, 11))
-        st.markdown(f"""
-            <div class='digit-slots'>
-                {digit_slots_html}
-            </div>
-            <div class='digit-labels'>
-                {label_slots_html}
-            </div>
-            """, unsafe_allow_html=True)
-
-        # ---------- SLIDER ----------
-
         if valid:
+            slots_placeholder = st.empty()
+            
+            padded_digits = list(digits_only.ljust(10, "•"))  # Dots for missing
             start, end = st.slider("Digit Positions (1–10)", 1, 10, (7, 10))
             custom_slice = digits_only[start - 1:end]
-        else:
-            custom_slice = ""
+            highlight_slot = [start <= i + 1 <= end for i in range(len(padded_digits))]
 
-        if custom_slice:
+            # ---------- DIGIT SLOTS ----------
+
+            digit_slots_html = "".join(
+                f"""<div class='digit-slot {"highlight-slot" if highlight_slot[i] else ""}'>{d}</div>""" for i, d in enumerate(padded_digits))
+            
+            label_slots_html = "".join(
+                f"<div class='digit-slot-pointer'>{i}</div>" for i in range(1, 11))
+
+            slots_placeholder.markdown(f"""
+                <div class='digit-slots'>
+                    {digit_slots_html}
+                </div>
+                <div class='digit-labels'>
+                    {label_slots_html}
+                </div>
+                """, unsafe_allow_html=True)
+            
             display_result(f"5. Sum of Digits {start} through {end}", custom_slice)
 
 elif digits_only.isdigit() and len(digits_only) != 10 and len(digits_only) > 0:
@@ -490,6 +499,7 @@ else:
         """, unsafe_allow_html=True)
 
 st.markdown("---")
+
 st.markdown("<br>", unsafe_allow_html=True)
 
 st.markdown("""
